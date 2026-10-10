@@ -8,12 +8,15 @@ use crate::{
   keyboard::{Key, KeyCode, KeyLocation, ModifiersState, NativeKeyCode},
 };
 use gtk4::{gdk, prelude::DisplayExtManual};
-use once_cell::sync::Lazy;
-use std::{collections::HashSet, sync::Mutex};
+use std::{
+  collections::HashSet,
+  sync::{LazyLock, Mutex},
+};
 
 pub type RawKey = gdk::Key;
 
-static KEY_STRINGS: Lazy<Mutex<HashSet<&'static str>>> = Lazy::new(|| Mutex::new(HashSet::new()));
+static KEY_STRINGS: LazyLock<Mutex<HashSet<&'static str>>> =
+  LazyLock::new(|| Mutex::new(HashSet::new()));
 
 fn insert_or_get_key_str(string: String) -> &'static str {
   let mut string_set = KEY_STRINGS.lock().unwrap();

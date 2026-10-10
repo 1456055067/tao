@@ -7,6 +7,9 @@ on:
     branches:
       - dev
 
+permissions:
+  contents: read
+
 jobs:
   tests:
     strategy:
@@ -43,7 +46,7 @@ jobs:
 
     runs-on: ${{ matrix.platform.os }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: dtolnay/rust-toolchain@stable
 
@@ -120,7 +123,7 @@ jobs:
   test_tao_macros:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: dtolnay/rust-toolchain@stable
 
@@ -134,6 +137,6 @@ jobs:
     name: fmt check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
       - run: cargo fmt --all -- --check
